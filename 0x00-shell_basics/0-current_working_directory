@@ -1,2 +1,2 @@
-echo "the current directory is"
+#!/bin/bash
 pwd
