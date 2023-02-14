@@ -1,2 +1,2 @@
 #!/bin/bash
-printf "%d" $BINARY
+ echo 'ibase=16; obase=2; $NUM' | bc
