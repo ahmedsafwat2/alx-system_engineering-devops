@@ -1,0 +1,11 @@
+https://docs.google.com/document/d/12GClkYJOjwDJHOTRm7eiyDSS2YoYpOFFf4tH5LmNOO0/edit?usp=sharing
+
+
+
+
+DNS Resolution: Your browser first checks its cache to see if it already knows the IP address associated with "google.com". If not found, it sends a Domain Name System (DNS) query to a DNS server. This server then translates the human-readable domain name "google.com" into an IP address (e.g., 172.217.9.206) that identifies the location of Google's servers on the internet.
+HTTP Request: Once the browser knows the IP address of Google's servers, it initiates an HTTP (or HTTPS) request to that server, specifying the path ("/") along with any additional headers such as user-agent information.
+Server Processing: The Google server receives the HTTP request and processes it. In this case, since you requested the homepage, the server fetches the appropriate HTML, CSS, and JavaScript files that make up the Google homepage.
+Page Rendering: The server sends back the requested files to your browser. Your browser then parses the HTML to understand the structure of the page, fetches any additional resources like images or stylesheets, and renders the webpage accordingly.
+Interactive Experience: Once the webpage is fully loaded, you see the Google homepage in your browser. You can interact with the search bar, click on links to access other Google services, or perform searches using Google's search engine
+
