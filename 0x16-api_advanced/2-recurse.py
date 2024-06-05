@@ -1,29 +1,28 @@
 #!/usr/bin/python3
-"""import libraries"""
-import requests
+"""Module for task 2"""
 
 
-def recurse(subreddit, hot_list=[], after=""):
-    try:
-        headers = {
-                'User-Agent': 'Mahmoud_Elwazeer'
-            }
-        params = {'after': after}
-        url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+def recurse(subreddit, hot_list=[], count=0, after=None):
+    """Queries the Reddit API and returns all hot posts
+    of the subreddit"""
+    import requests
 
-        req = requests.get(
-            url, headers=headers, params=params,  allow_redirects=False).json()
-        get_data = req.get("data")
-        after = get_data.get("after")
+    sub_info = requests.get("https://www.reddit.com/r/{}/hot.json"
+                            .format(subreddit),
+                            params={"count": count, "after": after},
+                            headers={"User-Agent": "My-User-Agent"},
+                            allow_redirects=False)
+    if sub_info.status_code >= 400:
+        return None
 
-        data = get_data.get("children")
-        for title in data:
-            hot_list.append(title.get("data").get("title"))
+    hot_l = hot_list + [child.get("data").get("title")
+                        for child in sub_info.json()
+                        .get("data")
+                        .get("children")]
 
-        if after is not None:
-            return recurse(subreddit, hot_list, after)
+    info = sub_info.json()
+    if not info.get("data").get("after"):
+        return hot_l
 
-        return (hot_list)
-
-    except Exception:
-        return (None)
+    return recurse(subreddit, hot_l, info.get("data").get("count"),
+                   info.get("data").get("after"))
